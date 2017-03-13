@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Javascript任务四</title>
+	<style type="text/css">
+	button{
+		font-family: 微软雅黑;
+	}
+	#left_exit{
+		margin-left: 30px;
+	}
+	#arr{
+		margin-top: 10px;
+	}
+	span{
+		display: inline-block;
+		padding: 5px;
+		color: #fff;
+		background-color: #4b8bf5;
+		margin-right: 5px;
+	}
+	</style>
+</head>
+<body>
+<!-- 创建基本按钮及输入框 -->
+    <input type="text" id="number">
+	<button id="left_into">左侧入</button>
+    <button id="right_into">右侧入</button>
+    <button id="left_exit">左侧出</button>
+    <button id="right_exit">右侧出</button>
+    <div id="arr"></div>
+    <script type="text/javascript">
+        var queue=new Array;
+        var list=document.getElementById("arr");
+        // 左侧入功能函数
+        function leftAdd(){
+        	var num=document.getElementById("number").value;
+        	queue.unshift(num);
+        	var li=document.createElement("span");
+        	var text=document.createTextNode(num);
+        	li.appendChild(text);
+        	list.insertBefore(li,list.childNodes[0]);
+        	clear();
+        	listDele();
+        }
+        // 右侧入功能函数
+        function rightAdd(){
+        	var num=document.getElementById("number").value;
+        	queue.push(num);
+        	var li=document.createElement("span");
+        	var text=document.createTextNode(num);
+        	li.appendChild(text);
+        	list.appendChild(li);
+        	listDele();
+        	clear();
+        }
+        // 左侧出功能函数
+        function leftDelete(){
+        	dele=queue.shift();
+        	list.removeChild(list.childNodes[0]);
+        	alert(dele);
+        	listDele();
+        }
+        // 右侧出功能函数
+        function rightDelete(){
+        	dele=queue.pop();
+            list.removeChild(list.childNodes[queue.length]);
+        	alert(dele);
+        	listDele();
+        }
+        // 点击队列元素进行删除
+        function listDele(){
+        	var arr=document.getElementById("arr");
+        	var len = document.getElementById("arr").childNodes.length;
+            for (var i = 0; i < len; i++) {
+                arr.onclick = function (e) {
+                    var e = e || window.event;
+                    var target = e.target || e.srcElement;
+                    if(target.tagName=="SPAN"){
+                    arr.removeChild(target);
+                    alert(target.tagName);
+                    }
+                }
+            }
+        }
+        // 重置文本框
+        function clear(){
+        	document.getElementById("number").value=null;
+        }
+        // 将函数绑定到事件
+        function connect(){
+        	var addleft=document.getElementById("left_into");
+        	addleft.onclick=leftAdd;
+        	var addright=document.getElementById("right_into");
+        	addright.onclick=rightAdd;
+        	var deleleft=document.getElementById("left_exit");
+        	deleleft.onclick=leftDelete;
+        	var deleright=document.getElementById("right_exit");
+        	deleright.onclick=rightDelete;
+        }
+        window.onload=connect();
+    </script>
+</body>
+</html>
