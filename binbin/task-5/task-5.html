@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Javascript任务四</title>
+	<style type="text/css">
+	button{
+		font-family: 微软雅黑;
+	}
+	#left_exit{
+		margin-left: 30px;
+	}
+	#arr{
+		margin-top: 10px;
+		height: 150px;
+	}
+	span{
+		display: inline-block;
+		width: 20px;
+		padding: 5px;
+		color: #fff;
+		background-color: #4b8bf5;
+		margin-right: 5px;
+		vertical-align:bottom;
+	}
+	</style>
+</head>
+<body>
+<!-- 创建基本按钮及输入框 -->
+    <input type="text" id="number">
+	<button id="left_into">左侧入</button>
+    <button id="right_into">右侧入</button>
+    <button id="left_exit">左侧出</button>
+    <button id="right_exit">右侧出</button>
+    <button id="order">排序</button>
+    <div id="arr"></div>
+    <script type="text/javascript">
+        var queue=new Array;
+        var list=document.getElementById("arr");
+        var lang=0;
+        // 左侧入功能函数
+        function leftAdd(){
+        	var num=document.getElementById("number").value;
+        	num=limitNumber(num);
+        	if(num==0){
+        		return 0;
+        	}
+            lang=limitArr(queue);
+            if(!lang){
+            	return 0;
+            }
+            queue.unshift(num);
+            clear();
+            clearArr(arr);
+            appear(queue);
+        }
+        // 右侧入功能函数
+        function rightAdd(){
+        	var num=document.getElementById("number").value;
+        	num=limitNumber(num);
+        	if(num==0){
+        		return 0;
+        	}
+        	lang=limitArr(queue);
+            if(!lang){
+            	return 0;
+            }
+            queue.push(num);
+            clearArr(arr);
+            appear(queue);
+        	clear();
+        }
+        // 左侧出功能函数
+        function leftDelete(){
+        	dele=queue.shift();
+        	list.removeChild(list.childNodes[0]);
+        	alert(dele);
+        	listDele();
+        }
+        // 右侧出功能函数
+        function rightDelete(){
+        	dele=queue.pop();
+            list.removeChild(list.childNodes[queue.length]);
+        	alert(dele);
+        	listDele();
+        }
+        // 点击队列元素进行删除
+        function listDele(){
+            arr.onclick = function (e) {
+                var e = e || window.event;
+                var target = e.target || e.srcElement;
+                if(target.tagName=="SPAN"){
+                    for(var i=0;i<queue.length;i++){
+                    	if(target.innerHTML==queue[i]){
+                    		arr.removeChild(target);
+                    		queue.splice(i,1);
+                    		alert(target.innerHTML);
+                    	}
+                    }
+                }
+            }
+        }
+        // 点击排序
+        function arrsrot(){
+        	var newqueue=order(queue);
+            clearArr();
+            appear(newqueue);
+        }
+        // 重置文本框
+        function clear(){
+        	document.getElementById("number").value=null;
+        }
+        // 将函数绑定到事件
+        function connect(){
+        	var addleft=document.getElementById("left_into");
+        	addleft.onclick=leftAdd;
+        	var addright=document.getElementById("right_into");
+        	addright.onclick=rightAdd;
+        	var deleleft=document.getElementById("left_exit");
+        	deleleft.onclick=leftDelete;
+        	var deleright=document.getElementById("right_exit");
+        	deleright.onclick=rightDelete;
+        	var newsort=document.getElementById("order");
+        	newsort.onclick=arrsrot;
+        }
+        // 限制输入数在10~100之间
+        function limitNumber(num){
+        	if(num<10){
+        		alert("数字过小");
+        		clear();
+        		return 0;
+        	}else if(num>100){
+        		alert("数字过大");
+        		clear();
+        		return 0;
+        	}else{
+        		return num;
+        	}
+        }
+        // 限制队列元素在60个以内
+        function limitArr(arr){
+        	var len=arr.length;
+        	if(len>59){
+        		alert("队列元素超过60");
+        		return false;
+        	}
+        	return true;
+        }
+        // 冒泡排序
+        function order(arr){
+        	var item;
+        	for(var j=0;j<arr.length;j++){
+        	    for(var i=0;i<arr.length;i++){
+        		    if(arr[i]>arr[i+1]){
+        			    item=arr[i];
+        			    arr[i]=arr[i+1];
+        			    arr[i+1]=item;
+        		    }
+        	    }
+            }
+        	return arr;
+        }
+        // 显示数组
+        function appear(arr){
+        	for(var i=0;i<arr.length;i++){
+        		var li=document.createElement("span");
+        	    var text=document.createTextNode(arr[i]);
+        	    li.appendChild(text);
+        	    list.appendChild(li);
+        	    li.style.height=arr[i]+"px";
+        	}
+        }
+        // 旧数组清除
+        function clearArr(){
+        	list.innerHTML="";
+        }
+        window.onload=function(){
+        	connect();
+            listDele();
+        }
+    </script>
+</body>
+</html>
