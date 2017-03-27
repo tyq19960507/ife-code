@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Javascript任务四</title>
+	<style type="text/css">
+	button{
+		font-family: 微软雅黑;
+	}
+	#left_exit{
+		margin-left: 30px;
+	}
+	#arr{
+		margin-top: 10px;
+	}
+	.sign{
+		color: red;
+		background-color: #ccc;
+	}
+	span{
+		display: inline-block;
+		width: 20px;
+		padding: 5px;
+		color: #fff;
+		background-color: #4b8bf5;
+		margin-right: 5px;
+	}
+	</style>
+</head>
+<body>
+<!-- 创建基本按钮及输入框 -->
+    <textarea id="content"></textarea>
+	<button id="left_into">左侧入</button>
+    <button id="right_into">右侧入</button>
+    <button id="left_exit">左侧出</button>
+    <button id="right_exit">右侧出</button>
+    <textarea id="query_text"></textarea>
+    <button id="query">查询</button>
+    <div id="arr"></div>
+    <script type="text/javascript">
+        var queue=new Array;
+        var list=document.getElementById("arr");
+        // 左侧入功能函数
+        function leftAdd(){
+        	var num=document.getElementById("content").value;
+        	var newnum=new Array;
+        	newnum=num.split(/。|\r|,|，|、|\s/);
+        	for(var i=newnum.length-1;i>=0;i--){
+                queue.unshift(newnum[i]);
+        	}
+            clear();
+            clearArr(arr);
+            appear(queue);
+        }
+        // 右侧入功能函数
+        function rightAdd(){
+        	var num=document.getElementById("content").value;
+        	var newnum=new Array;
+        	newnum=num.split(/。|\r|,|，|、|\s/);
+        	for(var i=0;i<newnum.length;i++){
+               queue.push(newnum[i]);
+        	}
+            clearArr(arr);
+            appear(queue);
+        	clear();
+        }
+        // 左侧出功能函数
+        function leftDelete(){
+        	dele=queue.shift();
+        	list.removeChild(list.childNodes[0]);
+        	alert(dele);
+        	listDele();
+        }
+        // 右侧出功能函数
+        function rightDelete(){
+        	dele=queue.pop();
+            list.removeChild(list.childNodes[queue.length]);
+        	alert(dele);
+        	listDele();
+        }
+        // 点击队列元素进行删除
+        function listDele(){
+            arr.onclick = function (e) {
+                var e = e || window.event;
+                var target = e.target || e.srcElement;
+                if(target.tagName=="SPAN"){
+                    for(var i=0;i<queue.length;i++){
+                    	if(target.innerHTML==queue[i]){
+                    		arr.removeChild(target);
+                    		queue.splice(i,1);
+                    		alert(target.innerHTML);
+                    	}
+                    }
+                }
+            }
+        }
+        // 重置文本框
+        function clear(){
+        	document.getElementById("content").value=null;
+        }
+        // 将函数绑定到事件
+        function connect(){
+        	var addleft=document.getElementById("left_into");
+        	addleft.onclick=leftAdd;
+        	var addright=document.getElementById("right_into");
+        	addright.onclick=rightAdd;
+        	var deleleft=document.getElementById("left_exit");
+        	deleleft.onclick=leftDelete;
+        	var deleright=document.getElementById("right_exit");
+        	deleright.onclick=rightDelete;
+        	var textSearch=document.getElementById("query");
+        	textSearch.onclick=search;
+        }
+        // 显示数组
+        function appear(arr){
+        	for(var i=0;i<arr.length;i++){
+        		var li=document.createElement("span");
+        	    var text=document.createTextNode(arr[i]);
+        	    li.appendChild(text);
+        	    list.appendChild(li);
+        	}
+        }
+        // 旧数组清除
+        function clearArr(){
+        	list.innerHTML="";
+        }
+        // 查询内容匹配
+        function search(){
+        	var text=document.getElementById("query_text").value;
+        	var searchText=list.getElementsByTagName("span");
+        	for(var i=0;i<searchText.length;i++){
+        		if(searchText[i].innerHTML.indexOf(text)>=0){
+        			searchText[i].setAttribute("class", "sign");
+        		}
+        	}
+        }
+        window.onload=function(){
+        	connect();
+            listDele();
+        }
+    </script>
+</body>
+</html>
