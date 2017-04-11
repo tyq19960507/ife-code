@@ -51,11 +51,11 @@
 	<script type="text/javascript">
 	    var validata=document.getElementById("ver");
         var result=document.getElementById("result");
-        var error="名称格式正确";
         function test(){
         	var name=document.getElementById("name");
         	var text=name.value;
         	var len=0;
+        	var error="名称格式正确";
         	for(var i=0;i<text.length;i++)
         		if(text.charCodeAt(i)>0&&text.charCodeAt(i)<127){
         			len+=1;
