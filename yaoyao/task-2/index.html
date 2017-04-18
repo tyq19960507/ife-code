@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>注册验证</title>
+	<style type="text/css">
+	#wraper{
+		width: 600px;
+		height: 360px;
+		margin: 0 auto;
+	}
+    .content{
+    	width: 600px;
+    	height: 45px;
+    	margin-top:10px;
+    }
+    label{
+    	display: inline-block;
+    	color: #323232;
+    	font-family: "黑体";
+    	font-size: 14px;
+    	width: 60px;
+    	text-align: right;
+    }
+    input{
+    	width: 200px;
+    	height: 25px;
+    	margin-left: 10px;
+    	padding-left: 10px;
+    	border:1px solid #ccc;
+    	border-radius: 4px;
+    	font-size: 12px;
+    }
+    #submit{
+    	width: 70px;
+    	height:30px;
+    	color: #fff;
+    	padding-left:5px;
+    	background-color: #2f79ba;
+    	border:1px solid #2f79ba;
+    	border-radius: 4px;
+    	font-size: 15px;
+    	margin-left: 220px;
+    }
+    p{
+    	font-size: 12px;
+    	color: #ccc;
+    	margin-left: 75px;
+    	margin-top: 2px;
+    }
+    .wrong{
+    	color: #d50113;
+    }
+    .inputwrong{
+    	border-color: #d50113;
+    }
+    .right{
+    	color: #60c24b;
+    }
+    .inputright{
+    	border-color: #60c24b;
+    }
+	</style>
+</head>
+<body>
+	<div id="wraper">
+		<div class="content">
+			<label for="name">名称</label>
+			<input type="text" placeholder="请输入名称" id="name">
+		</div>
+		<div class="content">
+			<label for="password1">密码</label>
+			<input type="password" placeholder="请输入密码" id="password1">
+		</div>
+		<div class="content">
+			<label for="password2">确认密码</label>
+			<input type="password" placeholder="请再次输入密码" id="password2">
+		</div>
+		<div class="content">
+			<label for="email">邮箱</label>
+			<input type="text" placeholder="请输入你的邮箱" id="email">
+		</div>
+		<div class="content">
+			<label for="phone">手机</label>
+			<input type="text" placeholder="请输入你的手机" id="phone">
+		</div>
+		<div class="content">
+		    <input type="submit" value="提交" id="submit">
+		</div>
+	</div>
+	<script type="text/javascript">
+	    var content=document.getElementsByClassName("content");
+	    var namere=document.getElementById("name");
+	    var password1=document.getElementById("password1");
+	    var password2=document.getElementById("password2");
+	    var email=document.getElementById("email");
+	    var phone=document.getElementById("phone");
+	    var submitdata=document.getElementById("submit");
+	    var a,b,c,d,e;
+	    function insertAfter(newElement,targetElement){
+           var parent=targetElement.parentNode;
+           if(parent.lastChild==targetElement){
+               parent.appendChild(newChild);
+           }else{
+           parent.insertBefore(newElement,targetElement.nextSibling);
+           }
+        }
+        // 名称
+        // /////填写提示
+        function nameHint(){
+        	var hintname=content[0].getElementsByClassName("namerequire");
+        	if(!hintname[0]){
+                var require=document.createElement("p");
+                var text=document.createTextNode("必填,长度为4~16个字符");
+                require.setAttribute("class","namerequire");
+                require.appendChild(text);
+                insertAfter(require,namere);
+        	}
+        }
+        // /////名称验证
+        function nameRequire(){
+        	var text=namere.value;
+        	var namehint=content[0].getElementsByClassName("namerequire");
+        	var len=0;
+        	var error="名称格式正确";
+        	for(var i=0;i<text.length;i++){
+        		if(text.charCodeAt(i)>0&&text.charCodeAt(i)<127){
+        			len+=1;
+        		}else{
+        			len+=2;
+        		}
+        	}
+        	if(len==0){
+        		error="名称不能为空";
+                namere.style.borderColor="#d50113";
+        		namehint[0].style.color="#d50113";
+        		a=0;
+        	}else if(len<4){
+        		error="名称过短";
+        		namere.style.borderColor="#d50113";
+        		namehint[0].style.color="#d50113";
+        		a=0;
+        	}else if(len>16){
+        		error="名称过长";
+        		namere.style.borderColor="#d50113";
+        		namehint[0].style.color="#d50113";
+        		a=0;
+        	}else{
+                namere.style.borderColor="#60c24b";
+        		namehint[0].style.color="#60c24b";
+        		a=1;
+        	}
+        	namehint[0].innerHTML=error;
+        }
+        // /////密码提示
+        function passwordOneHint(){
+        	var hintpassword=content[1].getElementsByClassName("passwordrequire");
+        	if(!hintpassword[0]){
+        		var password=document.getElementById("password1");
+                var require=document.createElement("p");
+                var text=document.createTextNode("必填,长度为9~16位数字或字母,标点符号");
+                require.setAttribute("class","passwordrequire");
+                require.appendChild(text);
+                insertAfter(require,password);
+        	}
+        }
+        // /////密码验证
+        function passwordOneRequire(){
+        	var password=document.getElementById("password1");
+        	var passwordtext=password.value;
+        	var passwordhint=content[1].getElementsByClassName("passwordrequire");
+        	var passwordright=1;
+        	var requireresult="密码格式正确";
+        	var len=0;
+        	for(var i=0;i<passwordtext.length;i++){
+        		if(passwordtext.charCodeAt(i)>0&&passwordtext.charCodeAt(i)<127){
+        			len+=1;
+        		}else{
+        			passwordright=0;
+        		}
+        	}
+        	if(len<9||len>16){
+        		passwordright=0;
+        	}
+        	if(passwordright==1){
+        		password1.style.borderColor="#60c24b";
+        		passwordhint[0].style.color="#60c24b";
+        		passwordhint[0].innerHTML=requireresult;
+        		b=1;
+        	}else{
+        		requireresult="密码格式不正确";
+        		password1.style.borderColor="#d50113";
+        		passwordhint[0].style.color="#d50113";
+                passwordhint[0].innerHTML=requireresult;
+                b=0;
+        	}
+        }
+        // 确认密码
+        function passwordTwoHint(){
+        	var hintpassword=content[2].getElementsByClassName("passwordrequire");
+        	if(!hintpassword[0]){
+        		var password=document.getElementById("password2");
+                var require=document.createElement("p");
+                var text=document.createTextNode("两次密码必须保持一致");
+                require.setAttribute("class","passwordrequire");
+                require.appendChild(text);
+                insertAfter(require,password);
+        	}
+        }
+        function passwordTwoRequire(){
+        	var password=password2.value;
+        	var confirm=password1.value;
+        	var confirmtext="两次密码一致";
+        	var requiretext=content[2].getElementsByClassName("passwordrequire");
+        	if(password.length>0&&password==confirm){
+        		password2.style.borderColor="#60c24b";
+        		requiretext[0].style.color="#60c24b"
+        		requiretext[0].innerHTML=confirmtext;
+        		c=1;
+        	}else{
+        		confirmtext="两次密码不一致";
+        		password2.style.borderColor="#d50113";
+        		requiretext[0].style.color="#d50113";
+        		requiretext[0].innerHTML=confirmtext;
+        		c=0;
+        	}
+        }
+        // 邮箱提示
+        function emailHint(){
+        	var hintemail=content[3].getElementsByClassName("emailrequire");
+        	if(!hintemail[0]){
+        		var text=document.createTextNode("请输入正确的邮箱格式");
+        		var require=document.createElement("p");
+        		require.appendChild(text);
+        		insertAfter(require,email);
+        		require.setAttribute("class","emailrequire");
+        	}
+        }
+        // 邮箱验证
+        function emailRequire(){
+        	var hintemail=content[3].getElementsByClassName("emailrequire");
+        	var myreg = /^([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+@([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+\.[a-zA-Z]{2,3}$/;
+        	var emailText=email.value;
+            var result="";
+        	if(myreg.test(emailText)){
+        		result="邮箱格式正确";
+        		email.style.borderColor="#60c24b"
+        		hintemail[0].style.color="#60c24b";
+        		d=1;
+        	}else{
+        		result="邮箱格式错误";
+        		email.style.borderColor="#d50113"
+        		hintemail[0].style.color="#d50113";
+        		d=0;
+        	}
+        	hintemail[0].innerHTML=result;
+        }
+        // 手机号提示
+        function phoneHint(){
+        	var hintphone=content[4].getElementsByClassName("phonerequire");
+        	if(!hintphone[0]){
+        		var text=document.createTextNode("请输入正确的手机号码");
+        		var require=document.createElement("p");
+        		require.appendChild(text);
+        		insertAfter(require,phone);
+        		require.setAttribute("class","phonerequire");
+        	}
+        }
+        // 手机号验证
+        function phoneRequire(){
+        	var hintphone=content[4].getElementsByClassName("phonerequire");
+        	var mobile=/^(13+\d{9})|(15+\d{9})|(18+\d{9})$/;
+        	var phoneText=phone.value;
+            var result="";
+        	if(mobile.test(phoneText)){
+        		result="号码格式正确";
+        		phone.style.borderColor="#60c24b"
+        		hintphone[0].style.color="#60c24b";
+        		e=1;
+        	}else{
+        		result="号码格式错误";
+        		phone.style.borderColor="#d50113"
+        		hintphone[0].style.color="#d50113";
+        		e=0;
+        	}
+        	hintphone[0].innerHTML=result;
+        }
+        // 提交验证
+        function require(){
+        	nameRequire();
+        	passwordOneRequire();
+        	passwordTwoRequire();
+        	emailRequire();
+        	phoneRequire();
+        	if(a&&b&&c&&d&&e){
+        		alert("提交成功");
+        	}else{
+        		alert("信息错误,提交失败");
+        	}
+        }
+        namere.onfocus=nameHint;
+        namere.onblur=nameRequire;
+        password1.onfocus=passwordOneHint;
+        password1.onblur=passwordOneRequire;
+        password2.onfocus=passwordTwoHint;
+        password2.onblur=passwordTwoRequire;
+        email.onfocus=emailHint;
+        email.onblur=emailRequire;
+        phone.onfocus=phoneHint;
+        phone.onblur=phoneRequire;
+        submitdata.onclick=require;
+	</script>
+</body>
+</html>
