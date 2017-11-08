@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>三栏式布局</title>
+	<style type="text/css">
+	*{
+		margin: 0px;
+		padding: 0px;
+	}
+	body,div{
+		padding: 20px;
+	}
+	div{
+		border: 1px solid #999;
+		background-color: #fff;
+		box-sizing:border-box;
+	}
+	.content{
+		background-color: #eee;
+		overflow: hidden;
+	}
+	.name{
+		width: 200px;
+		float: left;
+	}
+	.name p{
+		display: inline-block;
+		margin-left: 10px;
+	}
+	img{
+		width: 80px;
+		height: 80px;
+		vertical-align: text-top;
+	}
+	.text{
+		margin: 0 170px 0 250px;
+	}
+	.logo{
+		width: 120px;
+		float: right;
+	}
+	.logo img{
+		margin-top: 20px;
+	}
+	.logo img:nth-child(1){
+		margin-top: 0px;
+	}
+	</style>
+</head>
+<body>
+	<div class="content">
+		<div class="name">
+			<img class="teamlogo" src="images/teamlogo.jpg"><p>古力娜扎</p>
+		</div>
+		<div class="logo">
+			<img src="images/mylogo.jpg">
+			<img src="images/mylogo.jpg">
+			<img src="images/mylogo.jpg">
+			<img src="images/mylogo.jpg">
+		</div>
+		<div class="text">
+			<p>古力娜扎（Gulnazar），1992年5月2日出生于新疆乌鲁木齐市，中国内地影视女演员、平面模特。2011年，古力娜扎考入北京电影学院表演系本科班就读；同年，她签约上海唐人电影制作有限公司，并出演个人首部电视剧《轩辕剑之天之痕》，而她也因此被观众熟知。此后两年，古力娜扎转战大银幕，并出演了警匪片《警察故事2013》、悬疑片《全城通缉》等电影作品。2015年，古力娜扎不仅主演了爱情片《爱我就陪我看电影》、神话剧《山海经之赤影传说》等影视作品</p>
+		</div>	
+	</div>
+</body> 
+</html>
