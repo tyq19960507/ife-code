@@ -104,3 +104,73 @@ li{
 	cursor: pointer;
 	border-right:1px solid #8d8d8d;
 }
+.second_part{
+	height: 360px;
+	background-color: #ededec;
+	position: relative;
+}
+.second_box{
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	margin-left: -410px;
+	margin-top: -120px;
+}
+.second_box img{
+	margin: 20px;
+	padding-left:353px; 
+}
+.second_box p{
+	font-size: 50px;
+	color: #a1a1a1;
+	letter-spacing: 5px;
+}
+.third_part{
+	height: 360px;
+	background:url(images/mainbody.png) no-repeat;
+	background-size: cover;
+	position: relative;
+}
+.third_box{
+	padding-top:100px;
+	position: absolute;
+	left: 50%;
+	color: #fff;
+	text-align: center;
+	margin-left:-407px;
+}
+.para1{
+	font-size: 23px;
+	margin-bottom: 10px;
+	cursor: pointer;
+}
+.third_box span{
+	display: inline-block;
+	width: 30px;
+	height: 20px;
+	border-top:2px solid #fff; 
+}
+.third_box form{
+	padding-top: 20px;
+}
+.third_box select{
+	font-size: 15px;
+	width: 200px;
+	height: 30px;
+	color: #a1a1a1;
+	padding-left: 10px;
+}
+.third_box input{
+	width: 200px;
+	height: 30px;
+	color: #fff;
+	background-color: #be4e48;
+	border: none;
+	text-align: center;
+	font-size: 15px;
+	letter-spacing: 10px;
+	cursor: pointer;
+}
+.forth_part{
+	height: 600px;
+}
